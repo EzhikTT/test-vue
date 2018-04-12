@@ -74,6 +74,7 @@
             var rowsEmpty = [];
             var rowTemplate = [];
             var sortOrders = [];
+            var isLoad = true;
 
             if(this.fields.length > 0 && this.rows > 0){
 
@@ -90,6 +91,8 @@
                 this.fields.forEach(function (key) {
                     sortOrders[key] = 1
                 });
+
+                isLoad = false;
             }
             else{
 
@@ -145,7 +148,7 @@
                 sortKey: '',
                 sortOrders: sortOrders,
                 style: this.styles,
-                isLoad: true
+                isLoad: isLoad
             }
         },
         methods: {
