@@ -1,9 +1,12 @@
 <template>
     <div>
-        <form >
+        <form>
             <input v-model="searchQuery"/>
             <a v-on:click="filterSave" href="void:javascript(0)">Search</a>
         </form>
+        <div v-show="isLoad">
+            Load date...
+        </div>
         <table>
             <thead :class="classHead">
                 <tr>
@@ -42,6 +45,8 @@
         <div>
             <button @click=clearTable()>Clear table</button>
         </div>
+        <div v-html="style">
+        </div>
     </div>
 </template>
 
@@ -61,7 +66,8 @@
 
                    return value.length <= 3;
                 }
-            }
+            },
+            'styles': String
         },
         data: function () {
 
@@ -120,6 +126,8 @@
                     this.columns.forEach(function (key) {
                         sortOrders[key] = 1
                     });
+
+                    this.isLoad = false;
                 });
             }
 
@@ -135,14 +143,16 @@
                 forSwapData: rowsEmpty,
                 rowTemp: rowTemplate,
                 sortKey: '',
-                sortOrders: sortOrders
+                sortOrders: sortOrders,
+                style: this.styles,
+                isLoad: true
             }
         },
         methods: {
             ajaxLoad: function () {
 
-                let smallData = 'https://www.filltext.com/?rows=32&id={number|1000}&firstName={firstName}&lastName={lastName}&email={email}&phone={phone|(xxx)xxx-xx-xx}&adress={addressObject}&description={lorem|32}';
-                let bigData = 'https://www.filltext.com/?rows=1000&id={number|1000}&firstName={firstName}&delay=3&lastName={lastName}&email={email}&phone={phone|(xxx)xxx-xx-xx}&adress={addressObject}&description={lorem|32}';
+                let smallData = 'http://www.filltext.com/?rows=32&id={number|1000}&firstName={firstName}&lastName={lastName}&email={email}&phone={phone|(xxx)xxx-xx-xx}&adress={addressObject}&description={lorem|32}';
+                let bigData = 'http://www.filltext.com/?rows=1000&id={number|1000}&firstName={firstName}&delay=3&lastName={lastName}&email={email}&phone={phone|(xxx)xxx-xx-xx}&adress={addressObject}&description={lorem|32}';
 
                 return fetch(Math.random() >= 0.5 ? bigData : smallData)
                     .then(function(response) {
@@ -207,7 +217,7 @@
     }
 </script>
 
-<style>
+<style >
     .pagination{
         display: inline-flex;
     }

@@ -5,7 +5,7 @@
 </template>
 
 <script>
-export default {git
+export default {
   name: 'App'
 }
 </script>
