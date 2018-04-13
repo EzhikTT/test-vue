@@ -165,11 +165,11 @@
             },
             deleteRow: function(index) {
 
-                this.filteredData.splice(index, 1);
+                this.filteredData.splice(index + this.startRow, 1);
             },
             addRow: function(index) {
 
-                this.filteredData.splice(index+1, 0, {});
+                this.filteredData.splice(index + 1, 0, {});
             },
             movePages: function(amount) {
 
@@ -183,6 +183,8 @@
             clearTable: function(){
 
                 this.filteredData = [];
+
+                this.filteredData.push({});
             },
             filterSave: function(){
 

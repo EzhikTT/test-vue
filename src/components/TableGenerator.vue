@@ -59,6 +59,19 @@
             },
             deleteTable: function(index){
 
+//                console.log(table);
+//                console.log(key);
+//                console.log(index);
+//                console.log(this.tables);
+//
+//                let i = index;
+
+//                let tables = this.tables.splice();
+//
+//                tables.splice(0, 1);
+//
+//                this.tables = tables.splice();
+
                 this.tables.splice(index, 1);
             }
         }
