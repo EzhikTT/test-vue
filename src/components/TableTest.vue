@@ -133,6 +133,8 @@
                         if(!this.columns.includes(keys[i])){
 
                             this.columns.push(keys[i]);
+
+                            rowTemplate[keys[i]] = '';
                         }
                     }
 

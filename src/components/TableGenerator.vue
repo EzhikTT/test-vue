@@ -11,14 +11,14 @@
             <textarea v-model="style" cols="90" rows="10"/><br/>
             <a class="button" v-on:click="addTable">Add table</a>
         </form>
-        <div v-for="(table, index) in tables">
+        <div v-for="(table, key) in tables" :key="table.id">
             <table-test
                 :fields="table.fields"
                 :rows="table.rows"
                 :meta="table.meta"
                 :styles="table.styles">
             </table-test>
-            <button v-on:click="deleteTable(index)">
+            <button v-on:click="deleteTable(key)">
                 Delete table
             </button>
         </div>
@@ -43,11 +43,15 @@
             addTable: function(){
 
                 let item = [];
+                let id;
+
+                id = this.tables.length;
 
                 item['fields'] = this.fields != '' ? this.fields.replace(' ', '').split(',') : [];
                 item['rows'] = Math.ceil(parseInt(this.rows));
                 item['meta'] = this.meta.replace(' ', '').split(',');
                 item['styles'] = '<style>' + this.style + '</style>';
+                item['id'] = id;
 
                 this.tables.push(item);
 
@@ -56,9 +60,9 @@
                 this.meta = '';
                 this.style = '';
             },
-            deleteTable: function(index){
+            deleteTable: function(key){
 
-                this.$delete(this.tables, index);
+                this.tables.splice(key, 1);
             }
         }
     };
