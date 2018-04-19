@@ -82,7 +82,7 @@
         data: function () {
 
             var rowsEmpty = [];
-            var rowTemplate = [];
+            var rowTemplate = {};
             var sortOrders = [];
             var isLoad = true;
 
@@ -95,7 +95,7 @@
 
                 for(let i = 0; i < this.rows; i++){
 
-                    rowsEmpty.splice(0, 0, {});
+                    rowsEmpty.splice(0, 0, rowTemplate);
                 }
 
                 this.fields.forEach(function (key) {
@@ -181,7 +181,7 @@
             },
             addRow: function(index) {
 
-                this.filteredData.splice(index + 1, 0, {});
+                this.filteredData.splice(index + 1, 0, this.rowTemp);
             },
             movePages: function(amount) {
 
@@ -196,7 +196,7 @@
 
                 this.filteredData = [];
 
-                this.filteredData.push({});
+                this.filteredData.push(this.rowTemp);
             },
             filterSave: function(){
 
