@@ -43,6 +43,15 @@
             <button @click=movePages(1)>Next</button>
         </div>
         <div>
+            <button @click=expJSON()>Export to JSON</button>
+        </div>
+        <div v-show="totJSON">
+            <p>JSON</p>
+            <textarea>
+                {{ testJSON }}
+            </textarea>
+        </div>
+        <div>
             <button @click=clearTable()>Clear table</button>
         </div>
         <div v-html="style">
@@ -67,7 +76,8 @@
                    return value.length <= 3;
                 }
             },
-            'styles': String
+            'styles': String,
+            'id': Number
         },
         data: function () {
 
@@ -148,7 +158,9 @@
                 sortKey: '',
                 sortOrders: sortOrders,
                 style: this.styles,
-                isLoad: isLoad
+                isLoad: isLoad,
+                totJSON: false,
+                testJSON: ''
             }
         },
         methods: {
@@ -216,7 +228,11 @@
                     b = b[key];
                     return (a === b ? 0 : a > b ? 1 : -1) * order
                 })
+            },
+            expJSON: function () {
 
+                this.testJSON = JSON.stringify(this.filteredData);
+                this.totJSON = true;
             }
         }
     }

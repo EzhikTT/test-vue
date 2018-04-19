@@ -30,8 +30,7 @@
 
     export default {
         name: 'TableGenerator',
-        data: function(){
-
+        data: function () {
             return {
                 tables: [],
                 fields: '',
@@ -48,7 +47,7 @@
                 item['fields'] = this.fields != '' ? this.fields.replace(' ', '').split(',') : [];
                 item['rows'] = Math.ceil(parseInt(this.rows));
                 item['meta'] = this.meta.replace(' ', '').split(',');
-                item['styles'] = '<style scoped>' + this.style + '</style>';
+                item['styles'] = '<style>' + this.style + '</style>';
 
                 this.tables.push(item);
 
@@ -59,20 +58,7 @@
             },
             deleteTable: function(index){
 
-//                console.log(table);
-//                console.log(key);
-//                console.log(index);
-//                console.log(this.tables);
-//
-//                let i = index;
-
-//                let tables = this.tables.splice();
-//
-//                tables.splice(0, 1);
-//
-//                this.tables = tables.splice();
-
-                this.tables.splice(index, 1);
+                this.$delete(this.tables, index);
             }
         }
     };
